@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class CameraSystem : MonoBehaviour
 {
+    [Header("Refrences")]
+    [SerializeField] private Camera cam;
     private Vector3 dragOrigin;
+
+    [Header("Values")]
+    [SerializeField] private float zoomSpeed = 1f;
+    [SerializeField] private float maxZoom = 10f;
+    [SerializeField] private float minZoom = 1f;
 
     void Update()
     {
@@ -15,17 +22,19 @@ public class CameraSystem : MonoBehaviour
     private void PanCamera()
     {
         if(Input.GetMouseButtonDown(0))
-            dragOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
 
         if(Input.GetMouseButton(0))
         {
-            Vector3 difference = dragOrigin - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
             transform.position += difference;
         }
     }
 
     private void ZoomCamera()
     {
-        
+        float zoomAmount = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        float newZoom = cam.orthographicSize - zoomAmount;
+        cam.orthographicSize = Mathf.Clamp(newZoom, minZoom, maxZoom);
     }
 }
