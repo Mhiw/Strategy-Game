@@ -608,7 +608,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -641,6 +641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1804616036}
+  zoomSpeed: 3
+  maxZoom: 10
+  minZoom: 1
 --- !u!1 &1814169834
 GameObject:
   m_ObjectHideFlags: 0
